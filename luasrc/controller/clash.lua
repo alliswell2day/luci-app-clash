@@ -261,10 +261,7 @@ function action_status()
 		dash_pass = dash_pass(),
 		clashtun_core = clashtun_core(),
 		e_mode = e_mode(),
-		in_use = in_use(),
-		subconf = subconf(),
-		upconf = upconf(),
-		cusconf = cusconf()
+		in_use = in_use()
 
 
 	})

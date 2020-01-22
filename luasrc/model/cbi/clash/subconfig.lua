@@ -196,7 +196,7 @@ btnrm.write=function(a,t)
 local a=fs.unlink("/usr/share/clash/config/sub/"..fs.basename(e[t].name))
 luci.sys.exec(string.format('uci set clash.config.config_name_remove="%s"',e[t].name))
 luci.sys.exec('uci commit clash')
-luci.sys.exec('/usr/share/clash/rmlist.sh 2>&1 &')
+luci.sys.exec('bash /usr/share/clash/rmlist.sh 2>&1 &')
 if a then table.remove(e,t)end
 return a
 end

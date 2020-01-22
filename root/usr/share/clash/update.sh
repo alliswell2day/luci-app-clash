@@ -10,7 +10,7 @@ REAL_LOG="/usr/share/clash/clash_real.txt"
  
 type=$(grep -F "${config_name}" "/usr/share/clashbackup/confit_list.conf" | awk -F '#' '{print $3}')
 
-if [ $type == "clash" ];then
+if [ $type == "clash" ] && [ ! -z $url ];then
 	if [ $lang == "en" ] || [ $lang == "auto" ];then
 				echo "Updating Configuration..." >$REAL_LOG
 	elif [ $lang == "zh_cn" ];then
@@ -27,7 +27,7 @@ if [ "$?" -eq "0" ]; then
 
 	fi
 fi
-elif [ $type == "v2ssr2clash" ];then
+elif [ $type == "v2ssr2clash" ] && [ ! -z $url ];then
 
 	if [ $lang == "en" ] || [ $lang == "auto" ];then
 				echo "Updating Configuration..." >$REAL_LOG

@@ -11,22 +11,29 @@ REAL_LOG="/usr/share/clash/clash_real.txt"
 type=$(grep -F "${config_name}" "/usr/share/clashbackup/confit_list.conf" | awk -F '#' '{print $3}')
 
 if [ $type == "clash" ];then
+	if [ $lang == "en" ] || [ $lang == "auto" ];then
+				echo "Updating Configuration..." >$REAL_LOG
+	elif [ $lang == "zh_cn" ];then
+				echo "开始更新配置" >$REAL_LOG
+	fi
 wget --no-check-certificate --user-agent="Clash/OpenWRT" $url -O 2>&1 >1 $CONFIG_YAML
 	
 if [ "$?" -eq "0" ]; then
 	if [ $lang == "en" ] || [ $lang == "auto" ];then
 		echo "Updating Configuration Completed" >$REAL_LOG
-		sleep 2
-		echo "Clash for OpenWRT" >$REAL_LOG
+
 	elif [ $lang == "zh_cn" ];then
 		echo "更新配置完成" >$REAL_LOG
-		sleep 2
-		echo "Clash for OpenWRT" >$REAL_LOG
+
 	fi
 fi
 elif [ $type == "v2ssr2clash" ];then
 
-
+	if [ $lang == "en" ] || [ $lang == "auto" ];then
+				echo "Updating Configuration..." >$REAL_LOG
+	elif [ $lang == "zh_cn" ];then
+				echo "开始更新配置" >$REAL_LOG
+	fi
 	
 	#awk '/config groups/,/##end/{print}' /etc/config/clashh 2>/dev/null >/usr/share/clash/v2ssr/config.bak 2>&1
 
@@ -929,7 +936,15 @@ rm -rf $TEMP_FILE $GROUP_FILE $Proxy_Group $CONFIG_FILE
 			echo "Clash for OpenWRT" >$REAL_LOG
 	fi
 	
-
+	if [ $lang == "en" ] || [ $lang == "auto" ];then
+		echo "Updating Configuration Completed" >$REAL_LOG
+		  sleep 2
+			echo "Clash for OpenWRT" >$REAL_LOG
+	elif [ $lang == "zh_cn" ];then
+		echo "更新配置完成" >$REAL_LOG
+		  sleep 2
+			echo "Clash for OpenWRT" >$REAL_LOG
+	fi
 
 mv /usr/share/clash/v2ssr/config.bak /etc/config/clash 2>/dev/null
 sleep 1

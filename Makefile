@@ -33,7 +33,6 @@ endef
 
 define Package/$(PKG_NAME)/conffiles
 /etc/config/clash
-/usr/share/clashbackup/address.list
 endef
 
 define Package/$(PKG_NAME)/prerm
@@ -69,6 +68,7 @@ if [ -z "$${IPKG_INSTROOT}" ]; then
 	mv /usr/share/clash/config/sub/config.yaml /usr/share/clashbackup/config.bak1 2>/dev/null
 	mv /usr/share/clash/config/upload/config.yaml /usr/share/clashbackup/config.bak2 2>/dev/null
 	mv /usr/share/clash/config/custom/config.yaml /usr/share/clashbackup/config.bak3 2>/dev/null
+	
 fi
 
 exit 0

@@ -773,8 +773,8 @@ msgstr "更新时间"
 msgid "File Name"
 msgstr "文件名"
 
-msgid "Use"
-msgstr "使用"
+msgid "Use Config"
+msgstr "使用配置"
 
 msgid "Size"
 msgstr "文件大小"
@@ -823,3 +823,6 @@ msgstr "自定义配置"
 
 msgid "Operation"
 msgstr "操作"
+
+msgid "NOT SELECTED"
+msgstr "未选择"

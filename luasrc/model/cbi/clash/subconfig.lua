@@ -116,7 +116,7 @@ if a then
 e[t]={}
 e[t].name=fs.basename(o)
 e[t].mtime=os.date("%Y-%m-%d %H:%M:%S",a.mtime)
-e[t].size=tostring(a.size)..' KB'
+e[t].size=tostring(a.size)
 e[t].remove=0
 e[t].enable=false
 end
@@ -203,4 +203,4 @@ end
 
 
 
-return kr,c,form,m
+return kr,c,f,m

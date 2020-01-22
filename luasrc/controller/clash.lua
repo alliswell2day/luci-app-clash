@@ -14,11 +14,10 @@ function index()
 	entry({"admin", "services", "clash"},alias("admin", "services", "clash", "overview"), _("Clash"), 10).dependent = false
 	entry({"admin", "services", "clash", "overview"},cbi("clash/overview"),_("Overview"), 10).leaf = true
 	entry({"admin", "services", "clash", "client"},cbi("clash/client"),_("Client"), 20).leaf = true
-	entry({"admin", "services", "clash", "import"},cbi("clash/import"),_("Import Config"), 30).leaf = true
 	entry({"admin", "services", "clash", "create"},cbi("clash/create"),_("Create Config"), 40).leaf = true
-    entry({"admin", "services", "clash", "servers-config"},cbi("clash/servers-config"), nil).leaf = true
+        entry({"admin", "services", "clash", "servers-config"},cbi("clash/servers-config"), nil).leaf = true
 	entry({"admin", "services", "clash", "provider-config"},cbi("clash/provider-config"), nil).leaf = true
-    entry({"admin", "services", "clash", "groups"},cbi("clash/groups"), nil).leaf = true
+        entry({"admin", "services", "clash", "groups"},cbi("clash/groups"), nil).leaf = true
 
 	entry({"admin", "services", "clash", "settings"}, firstchild(),_("Settings"), 50)
 	entry({"admin", "services", "clash", "settings", "port"},cbi("clash/port"),_("Proxy Ports"), 60).leaf = true
@@ -26,7 +25,7 @@ function index()
 	entry({"admin", "services", "clash", "settings", "geoip"},cbi("clash/geoip"),_("Update GeoIP"), 80).leaf = true
 	entry({"admin", "services", "clash", "settings", "list"},cbi("clash/list"),_("Custom List"), 90).leaf = true
 			
-	entry({"admin", "services", "clash", "config"},firstchild(),_("Config"), 100)
+	entry({"admin", "services", "clash", "config"},firstchild(),_("Config"), 30)
 	entry({"admin", "services", "clash", "config", "actconfig"},cbi("clash/actconfig"),_("Config In Use"), 110).leaf = true
 	entry({"admin", "services", "clash", "config", "subconfig"},cbi("clash/subconfig"),_("Subscribe Config"), 120).leaf = true
 	entry({"admin", "services", "clash", "config", "upconfig"},cbi("clash/upconfig"),_("Uploaded Config"), 130).leaf = true
@@ -49,10 +48,61 @@ function index()
 	entry({"admin", "services", "clash", "check_geoip"}, call("check_geoip_log")).leaf=true	
 	entry({"admin", "services", "clash", "corelog"},call("down_check")).leaf=true
 	entry({"admin", "services", "clash", "logstatus"},call("logstatus_check")).leaf=true
+	entry({"admin", "services", "clash", "conf"},call("action_conf")).leaf=true
+	entry({"admin", "services", "clash", "update_config"},call("action_update")).leaf=true
 	
 end
 
 local fss = require "luci.clash"
+
+
+function action_update()
+	luci.sys.exec("kill $(pgrep /usr/share/clash/update.sh) ; (bash /usr/share/clash/update.sh >/tmp/clash.txt 2>&1) &")
+end
+
+
+local function in_use()
+	return luci.sys.exec("uci get clash.config.config_type")
+end
+
+
+local function subconf()
+	if nixio.fs.access(string.sub(luci.sys.exec("uci get clash.config.config_path_sub"), 1, -2)) then
+	return fss.basename(string.sub(luci.sys.exec("uci get clash.config.config_path_sub"), 1, -2))
+	else
+	return ""
+	end
+end
+
+
+
+local function upconf()
+	if nixio.fs.access(string.sub(luci.sys.exec("uci get clash.config.config_path_up"), 1, -2)) then
+	return fss.basename(string.sub(luci.sys.exec("uci get clash.config.config_path_up"), 1, -2))
+	else
+	return ""
+	end
+
+end
+
+local function cusconf()
+	if nixio.fs.access(string.sub(luci.sys.exec("uci get clash.config.config_path_cus"), 1, -2)) then
+	return fss.basename(string.sub(luci.sys.exec("uci get clash.config.config_path_cus"), 1, -2))
+	else
+	return ""
+	end
+
+end
+
+function action_conf()
+	luci.http.prepare_content("application/json")
+	luci.http.write_json({
+	subconf = subconf(),
+	upconf = upconf(),
+	cusconf = cusconf(),
+	})
+end
+
 
 local function dash_port()
 	return luci.sys.exec("uci get clash.config.dash_port 2>/dev/null")
@@ -196,7 +246,6 @@ function check_status()
 		clashtun_core = clashtun_core(),
 		new_core_version = new_core_version()
 		
-
 	})
 end
 function action_status()
@@ -211,7 +260,12 @@ function action_status()
 		clashr_core = clashr_core(),
 		dash_pass = dash_pass(),
 		clashtun_core = clashtun_core(),
-		e_mode = e_mode()
+		e_mode = e_mode(),
+		in_use = in_use(),
+		subconf = subconf(),
+		upconf = upconf(),
+		cusconf = cusconf()
+
 
 	})
 end

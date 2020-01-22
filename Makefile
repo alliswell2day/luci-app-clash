@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk 
 
 PKG_NAME:=luci-app-clash
-PKG_VERSION:=1.4.8
+PKG_VERSION:=1.4.9
 PKG_MAINTAINER:=frainzy1477
 
 
@@ -33,6 +33,7 @@ endef
 
 define Package/$(PKG_NAME)/conffiles
 /etc/config/clash
+/usr/share/clashbackup/address.list
 endef
 
 define Package/$(PKG_NAME)/prerm
@@ -112,10 +113,7 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/share/clash/config/upload
 	$(INSTALL_DIR) $(1)/usr/share/clash/config/custom
 	$(INSTALL_DIR) $(1)/usr/share/clash/v2ssr
-	
-	$(INSTALL_BIN) ./root/usr/share/clash/config/upload/config.yaml $(1)/usr/share/clash/config/upload/
-	$(INSTALL_BIN) ./root/usr/share/clash/config/custom/config.yaml $(1)/usr/share/clash/config/custom/
-	$(INSTALL_BIN) ./root/usr/share/clash/config/sub/config.yaml $(1)/usr/share/clash/config/sub/
+
 
 	$(INSTALL_BIN) 	./root/etc/init.d/clash $(1)/etc/init.d/clash
 	$(INSTALL_CONF) ./root/etc/config/clash $(1)/etc/config/clash
@@ -144,6 +142,11 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_BIN) ./root/usr/share/clash/geoip.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/list.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/v2ssr.sh $(1)/usr/share/clash/
+	
+	$(INSTALL_BIN) ./root/usr/share/clash/rmlist.sh $(1)/usr/share/clash/
+	$(INSTALL_BIN) ./root/usr/share/clash/cuslist.sh $(1)/usr/share/clash/
+	$(INSTALL_BIN) ./root/usr/share/clash/update.sh $(1)/usr/share/clash/
+	
 	$(INSTALL_BIN) ./root/usr/share/clash/server.list $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/clash_real.txt $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/logstatus_check $(1)/usr/share/clash/

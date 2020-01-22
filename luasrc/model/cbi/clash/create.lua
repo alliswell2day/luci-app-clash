@@ -62,6 +62,16 @@ cc = s:option(Flag, "create", translate("Enable Create"))
 cc.default = 1
 cc.description = translate("Enable to create configuration")
 
+o = s:option(Value, "create_tag")
+o.title = translate("Config Name")
+o.rmempty = true
+o.description = translate("Give a name for your config")
+
+cc = s:option(Flag, "same_tag", translate("Force Same Name"))
+cc.default = 1
+cc.description = translate("Enable to overwrite config file")
+
+
 o = s:option(ListValue, "loadfrom", translate("Load From"))
 o:value("sub", translate("Subscription Config"))
 o:value("upl", translate("Upload Config"))

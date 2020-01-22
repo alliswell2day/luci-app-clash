@@ -46,9 +46,9 @@ o:depends("core",3)
 
 o = s:option(ListValue, "config_type", translate("Config Type"))
 o.default = "sub"
-o:value("sub", translate("Subscription Config"))
-o:value("upl", translate("Uploaded Config"))
-o:value("cus", translate("Custom Config"))
+o:value("1", translate("Subscription Config"))
+o:value("2", translate("Uploaded Config"))
+o:value("3", translate("Custom Config"))
 o.description = translate("Select Configuration type")
 
 o = s:option(Button, "Apply")
@@ -60,7 +60,7 @@ o.write = function()
 end
 
 o = s:option(Button,"action")
-o.title = translate("Action")
+o.title = translate("Operation")
 o.template = "clash/start_stop"
 
 

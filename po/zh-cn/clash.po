@@ -766,3 +766,60 @@ msgstr "未选择文件"
 
 msgid "Chose File"
 msgstr "选择文件"
+
+msgid "Update Time"
+msgstr "更新时间"
+
+msgid "File Name"
+msgstr "文件名"
+
+msgid "Use"
+msgstr "使用"
+
+msgid "Size"
+msgstr "文件大小"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Download Config"
+msgstr "下载配置"
+
+msgid "Config Name"
+msgstr "配置名"
+
+msgid "Give a name for your config"
+msgstr "为配置命名"
+
+msgid "CONFIG IN USE"
+msgstr "使用中的配置"
+
+msgid "Daily Server subscription update time. Only update config in use"
+msgstr "每日服务器订阅更新时间。仅更新正在使用的配置"
+
+msgid "NB: Only upload file with name .yaml.It recommended to rename each upload file name to avoid overwrite"
+msgstr "注意：仅上载名为.yaml的文件。建议重命名每个上载文件名以避免覆盖"
+
+msgid "Not Selected"
+msgstr "未选择"
+
+msgid "Force Same Name"
+msgstr "强制使用同名"
+
+msgid "Enable to overwrite config file"
+msgstr "启用覆盖配置文件"
+
+msgid "Clash Config"
+msgstr "Clash配置"
+
+msgid "SUBSCRIBE"
+msgstr "订阅配置"
+
+msgid "UPLOAD"
+msgstr "上传配置"
+
+msgid "CUSTOM"
+msgstr "自定义配置"
+
+msgid "Operation"
+msgstr "操作"

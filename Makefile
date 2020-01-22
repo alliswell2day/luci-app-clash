@@ -107,21 +107,17 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/etc/clash/clashtun
 	$(INSTALL_DIR) $(1)/usr/share/clashbackup
 	$(INSTALL_DIR) $(1)/etc/clash/provider
-	
 	$(INSTALL_DIR) $(1)/usr/share/clash/config
 	$(INSTALL_DIR) $(1)/usr/share/clash/config/sub
 	$(INSTALL_DIR) $(1)/usr/share/clash/config/upload
 	$(INSTALL_DIR) $(1)/usr/share/clash/config/custom
 	$(INSTALL_DIR) $(1)/usr/share/clash/v2ssr
-
-
+	
 	$(INSTALL_BIN) 	./root/etc/init.d/clash $(1)/etc/init.d/clash
 	$(INSTALL_CONF) ./root/etc/config/clash $(1)/etc/config/clash
 	$(INSTALL_CONF) ./root/etc/clash/* $(1)/etc/clash/
-
 	$(INSTALL_BIN) ./root/usr/share/clash/v2ssr/v2ssr_custom_rule.yaml $(1)/usr/share/clash/v2ssr/
 	$(INSTALL_BIN) ./root/usr/share/clash/v2ssr/policygroup $(1)/usr/share/clash/v2ssr/
-
 	$(INSTALL_BIN) ./root/usr/share/clash/clash-watchdog.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/clash.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/load.sh $(1)/usr/share/clash/
@@ -142,22 +138,20 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_BIN) ./root/usr/share/clash/geoip.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/list.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/v2ssr.sh $(1)/usr/share/clash/
-	
+	$(INSTALL_BIN) ./root/usr/share/clash/uplist.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/rmlist.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/cuslist.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/update.sh $(1)/usr/share/clash/
-	
+	$(INSTALL_BIN) ./root/usr/share/clash/del_servers.sh $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/server.list $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/clash_real.txt $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/logstatus_check $(1)/usr/share/clash/
 	$(INSTALL_BIN) ./root/usr/share/clash/clash.txt $(1)/tmp/
-
 	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/index.html $(1)/usr/share/clash/dashboard/
 	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/main.0bddb85299f970595cb5.css $(1)/usr/share/clash/dashboard/
 	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/img/33343e6117c37aaef8886179007ba6b5.png $(1)/usr/share/clash/dashboard/img/
 	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/js/1.bundle.0bddb85299f970595cb5.min.js $(1)/usr/share/clash/dashboard/js/
 	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/js/bundle.0bddb85299f970595cb5.min.js $(1)/usr/share/clash/dashboard/js/
-        
 	$(INSTALL_DATA) ./luasrc/clash.lua $(1)/usr/lib/lua/luci/
 	$(INSTALL_DATA) ./luasrc/controller/*.lua $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DATA) ./luasrc/model/cbi/clash/*.lua $(1)/usr/lib/lua/luci/model/cbi/clash/
